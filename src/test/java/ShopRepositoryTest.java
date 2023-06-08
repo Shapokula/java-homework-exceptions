@@ -34,4 +34,32 @@ class ShopRepositoryTest {
             repo.removeById(4);
         });
     }
+
+    @Test
+    public void shouldAddNewProduct() {
+        ShopRepository repo = new ShopRepository();
+        repo.add(product1);
+        repo.add(product2);
+        repo.add(product3);
+
+        Product[] expected = { product1, product2, product3 };
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotAddNewProductIfIdAlreadyExists() {
+        ShopRepository repo = new ShopRepository();
+        repo.add(product1);
+        repo.add(product2);
+        repo.add(product3);
+
+        Product product4 = new Product(1, "Рубашка", 500);
+
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repo.add(product4);
+        });
+    }
+
 }
