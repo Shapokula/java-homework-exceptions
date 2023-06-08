@@ -33,7 +33,7 @@ public class ShopRepository {
     public void removeById(int id) {
         if ( findById(id) == null ) {
             throw new NotFoundException(
-                    "Element with id: \" + id + \" not found"
+                    "Element with id: " + id + " not found"
             );
         }
         Product[] tmp = new Product[products.length - 1];
